@@ -23,9 +23,13 @@ public class IntervalTree {
 			newLink.higher = b;
 			if( intervals == null || intervals.compareTo(a,b)<0 )
 			{
-			  newLink.next=intervals;
-			  intervals=newLink;
-			  return;
+				newLink.next=intervals;
+				if(intervals != null)
+				{
+					intervals.prev = newLink;
+				}	
+				intervals=newLink;
+				return;
 			}
 			if(intervals.lower == a && intervals.higher == b)
 			{
@@ -43,11 +47,14 @@ public class IntervalTree {
 				else
 				{
 					newLink.next = temp.next;
+					newLink.prev = temp;
+					temp.next.prev = newLink;
 					temp.next = newLink;
 					return;
 				}
 			}
 			newLink.next = temp.next;
+			newLink.prev = temp;
 			temp.next = newLink;
 		}
 		
@@ -108,6 +115,10 @@ public class IntervalTree {
 			if(intervals.lower == a && intervals.higher == b)
 			{
 				intervals = intervals.next;
+				if(intervals != null)
+				{
+					intervals.prev = null;
+				}
 				return;
 			}
 
@@ -119,6 +130,10 @@ public class IntervalTree {
 				if(chain.next.lower == a && chain.next.higher == b)
 				{
 					chain.next = chain.next.next;
+					if(chain.next != null)
+					{
+						chain.next.prev = chain;
+					}
 					return;
 				}
 				
@@ -129,6 +144,7 @@ public class IntervalTree {
 	}
 	
 	static class Link {
+		Link prev;
 		Link next;
 		int lower;
 		int higher;
