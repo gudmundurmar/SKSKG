@@ -1,0 +1,60 @@
+\documentclass{article}
+\input{grunn_uppsetn_hd}
+\usepackage[utf8]{inputenc}
+\usepackage{minted}
+
+
+\begin{document}
+
+\begin {titlepage}
+\begin{center}
+\includegraphics[width=0.15\textwidth]{./Haskoli_Islands_rett.jpg}~\\[1cm]
+
+\textsc{\LARGE Greining Reiknirita}\\[1.5cm]
+
+\textsc{\Large TÖL403G}\\[0.5cm]
+
+% Title
+\HRule \\[0.4cm]
+{ \huge \bfseries Skilaverkefni 2\\[0.4cm] }
+
+\HRule \\[1.5cm]
+
+% Author and supervisor
+\begin{minipage}{0.5\textwidth}
+\begin{flushleft} \large
+\emph{Verkefnishöfundar:}
+\\ Guðmundur\textsc{ Már Gunnarsson }
+\\ Skarphéðinn \textsc{Þórðarsson}
+\\ Sigurður \textsc{Skúli Sigurgeirsson}
+
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Kennari:} \\
+Páll \textsc{Melsted}
+\end{flushright}
+\end{minipage}
+
+\vfill
+
+% Bottom of the page
+{\large \today}
+
+\end{center}
+
+\end{titlepage}
+
+
+
+
+\inputminted[mathescape,
+               linenos,
+               numbersep=5pt,
+               gobble=2,
+               frame=lines,
+               framesep=2mm]{java}{../IntervalTree.java}
+
+
+\end{document}

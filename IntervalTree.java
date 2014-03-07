@@ -2,20 +2,20 @@ import java.util.Scanner;
 
 public class IntervalTree {
 
-	//nóğurnar í trénu
+	//nÃ³Ã°urnar Ã­ trÃ©nu
 	static class Node
 	{
-		int q; //miğgildiğ í bilinu
-		int lower; //neğri mörk
-		int higher; //efri mörk
+		int q; //miÃ°gildiÃ° Ã­ bilinu
+		int lower; //neÃ°ri mÃ¶rk
+		int higher; //efri mÃ¶rk
 		Node left; //vinstra barn
-		Node right; //hægra barn
+		Node right; //hÃ¦gra barn
 		Node parent; //foreldri
-		Link intervals; //bilin sem skerast á viğ biliğ í nóğunni
+		Link intervals; //bilin sem skerast Ã¡ viÃ° biliÃ° Ã­ nÃ³Ã°unni
 		
 		//Notkun: node.insertInterval(a,b);
-		//Fyrir: a og b eru heiltölur, a < b
-		//Eftir: búiğ er ağ setja biliğ [a,b] á réttan stağ í intervals
+		//Fyrir: a og b eru heiltÃ¶lur, a < b
+		//Eftir: bÃºiÃ° er aÃ° setja biliÃ° [a,b] Ã¡ rÃ©ttan staÃ° Ã­ intervals
 		void insertInterval(int a, int b)
 		{
 			Link newLink = new Link();
@@ -52,8 +52,8 @@ public class IntervalTree {
 		}
 		
 		//Notkun: node.findIntersections(a,b);
-		//Fyrir: a og b eru heiltölur, a < b
-		//Eftir: búiğ er ağ finna öll bil sem skerast á viğ biliğ [a,b]
+		//Fyrir: a og b eru heiltÃ¶lur, a < b
+		//Eftir: bÃºiÃ° er aÃ° finna Ã¶ll bil sem skerast Ã¡ viÃ° biliÃ° [a,b]
 		int findIntersections(int a,int b)
 		{
 			Link chain = intervals;
@@ -79,8 +79,8 @@ public class IntervalTree {
 		}
 		
 		//Notkun: node.findContains(a,b);
-		//Fyrir: a og b eru heiltölur, a < b
-		//Eftir: búiğ er ağ finna öll bil sem innihalda [a,b]
+		//Fyrir: a og b eru heiltÃ¶lur, a < b
+		//Eftir: bÃºiÃ° er aÃ° finna Ã¶ll bil sem innihalda [a,b]
 		boolean findContains(int a,int b)
 		{
 			Link chain = intervals;
@@ -104,7 +104,7 @@ public class IntervalTree {
 		{
 			if(intervals == null) return;
 			
-			//athugar hvort fremsta stakiğ sé şağ sem veriğ er ağ leita af
+			//athugar hvort fremsta stakiÃ° sÃ© Ã¾aÃ° sem veriÃ° er aÃ° leita af
 			if(intervals.lower == a && intervals.higher == b)
 			{
 				intervals = intervals.next;
@@ -113,7 +113,7 @@ public class IntervalTree {
 
 			Link chain = intervals;
 			
-			//fer í gegnum afganginn af listanum og leitar
+			//fer Ã­ gegnum afganginn af listanum og leitar
 			while(chain.next != null)
 			{
 				if(chain.next.lower == a && chain.next.higher == b)
@@ -134,8 +134,8 @@ public class IntervalTree {
 		int higher;
 		
 		//Notkun: link.compareTo(a,b);
-		//Fyrir: a og b eru heiltölur, a < b
-		//Eftir: Skilar 1 ef [lower,higher] < [a,b], 0 ef şau eru jöfn og -1 annars
+		//Fyrir: a og b eru heiltÃ¶lur, a < b
+		//Eftir: Skilar 1 ef [lower,higher] < [a,b], 0 ef Ã¾au eru jÃ¶fn og -1 annars
 		int compareTo(int a, int b)
 		{
 			if(lower < a)
@@ -172,8 +172,8 @@ public class IntervalTree {
 	}
 	
 	//Notkun: tree.insert(a,b);
-	//Fyrir: a og b eru heiltölur, a < b
-	//Eftir: búiğ er ağ bæta bilinu [a,b] í tréğ
+	//Fyrir: a og b eru heiltÃ¶lur, a < b
+	//Eftir: bÃºiÃ° er aÃ° bÃ¦ta bilinu [a,b] Ã­ trÃ©Ã°
 	public void insert(int a, int b)
 	{
 		if(b < a) return;
@@ -228,8 +228,8 @@ public class IntervalTree {
 	}
 	
 	//Notkun: tree.intersects(a,b,root);
-	//Fyrir: a og b eru heiltölur, a < b, root er nóğa
-	//Eftir: búiğ er ağ finna öll bil sem skerast á viğ [a,b]
+	//Fyrir: a og b eru heiltÃ¶lur, a < b, root er nÃ³Ã°a
+	//Eftir: bÃºiÃ° er aÃ° finna Ã¶ll bil sem skerast Ã¡ viÃ° [a,b]
 	public int intersects(int a, int b, Node node)
 	{
 		if(b < a) return 0;
@@ -269,8 +269,8 @@ public class IntervalTree {
 	}
 	
 	//Notkun: tree.contains(a,b,root);
-	//Fyrir: a og b eru heiltölur, a <= b, root er nóğa
-	//Eftir: búiğ er ağ finna öll bil sem innihalda[a,b]
+	//Fyrir: a og b eru heiltÃ¶lur, a <= b, root er nÃ³Ã°a
+	//Eftir: bÃºiÃ° er aÃ° finna Ã¶ll bil sem innihalda[a,b]
 	public boolean contains(int a, int b, Node node)
 	{
 		if(b < a) return false;
@@ -314,7 +314,7 @@ public class IntervalTree {
 	
 	//Notkun: tree.point(a);
 	//Fyrir: a er heiltala
-	//Eftir: búiğ er ağ finna öll bil sem innihalda a
+	//Eftir: bÃºiÃ° er aÃ° finna Ã¶ll bil sem innihalda a
 	public void point(int a)
 	{
 		boolean instance = contains(a, a, root);
@@ -326,8 +326,8 @@ public class IntervalTree {
 	}
 	
 	//Notkun: tree.delete(a,b);
-	//Fyrir: a og b eru heiltölur, a <= b
-	//Eftir: Ef [a,b] var í trénu şá er búiğ ağ eyğa şví
+	//Fyrir: a og b eru heiltÃ¶lur, a <= b
+	//Eftir: Ef [a,b] var Ã­ trÃ©nu Ã¾Ã¡ er bÃºiÃ° aÃ° eyÃ°a Ã¾vÃ­
 	public void delete(int a, int b)
 	{
 		
@@ -372,8 +372,8 @@ public class IntervalTree {
 	}
 	
 	//Notkun: tree.deleteNode(node)
-	//Fyrir: node er nóğa
-	//Eftir: Búiğ er ağ fjarlægja node úr trénu
+	//Fyrir: node er nÃ³Ã°a
+	//Eftir: BÃºiÃ° er aÃ° fjarlÃ¦gja node Ãºr trÃ©nu
 	public void deleteNode(Node node)
 	{
 		
@@ -407,7 +407,7 @@ public class IntervalTree {
 		
 	
 	
-	//gengur í gegnum tréğ, bara ağstoğarfall ekki skila
+	//gengur Ã­ gegnum trÃ©Ã°, bara aÃ°stoÃ°arfall ekki skila
 	public void traverse(Node root)
 	{
 		if(root == null)

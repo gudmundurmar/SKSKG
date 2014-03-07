@@ -1,0 +1,80 @@
+% Útgáfa 1.5
+
+% pakkar fyrir töflur; array er notað í "math-mode"; arydshln fyrir brotalínur í töflum
+\usepackage{array,tabularx}%,arydshln}  
+% íslenskt letur, orðaskiptingar ...
+\usepackage[icelandic]{babel}
+\usepackage[T1]{fontenc}
+% númera jöfnur, töflur, myndir, ...
+\usepackage{enumerate}
+% fyrir krækjur
+\usepackage[colorlinks,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+% ýmis tákn, leturgerðir, ... ATH amsmath fyrir \text{} skipunina
+\usepackage{amsmath,amssymb,euscript}   
+% til að setja inn *.eps myndir ef við notum dvi og ps skjöl...
+\usepackage{epsfig}    % \epsfig{...}
+% ... en ef við notum pdf beint, þá er þetta pakkinn sem við þurfum
+\usepackage{graphicx}  % \includegraphics[...]{...}
+% litamöguleikar fyrir texta
+\usepackage{color}
+% til þess að myndir og töflur standi þar sem þær eiga að standa!
+\usepackage{here}
+%
+\setlength{\textwidth}{6in}
+\setlength{\textheight}{9in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\topskip}{0in}
+\setlength{\topmargin}{0cm}
+\setlength{\oddsidemargin}{0in}
+% dregur fyrstu línu í hverri málsgrein inn - nota 0cm fyrir engan inndrátt fyrir allar málsgreinar en \noindent í upphafi málsgreinar til að hafa engan inndrátt í þeirri málsgrein einni:
+\setlength{\parindent}{0cm}
+% viljum hafa eitt línubil milli efnisgreina
+\setlength{\parskip}{1.5ex plus 0.75ex minus 0.5ex}
+% 1.5 í línubil
+\renewcommand{\baselinestretch}{1.025}
+
+% Environments
+\newenvironment{alist}[1][$\quad\,$1.]{
+\vspace*{-8pt} \begin{enumerate}[label=\alph*),itemsep=4pt,parsep=3pt]}
+{\end{enumerate}\vspace*{-3pt}}
+
+\newenvironment{ttafla}[1][$\quad\,$1.]{
+\begin{tabular}{rcl} \renewcommand\arraystretch{2} }
+{\end{tabular}}
+
+
+
+%Bætt við af mér (Hannesi)
+% Þjappa saman
+\widowpenalty=600
+\clubpenalty=600
+\usepackage[compact]{titlesec}
+\titlespacing{\section}{0pt}{2ex plus 0.75ex minus 0.75ex}{1ex plus 0.3ex minus 0.3ex}
+\titlespacing{\subsection}{0pt}{1ex plus 0.25ex minus 0.25ex}{0ex plus 0.1ex minus 0.1ex}
+\titlespacing{\subsubsection}{0pt}{0.5ex plus 0.1ex minus 0.1ex}{0ex plus 0.1ex minus 0.1ex}
+
+% Bolda caption
+\usepackage[hang,small,bf]{caption}
+
+% Efnaformúlur og myndir
+%\usepackage[version=3]{mhchem}
+\usepackage{chemfig}
+
+% Komma í stað punkts
+\usepackage{icomma}
+
+% Annað
+\usepackage{subfig}
+\usepackage{array}
+\usepackage{bigstrut}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{enumerate}
+%\usepackage{enumitem}
+\usepackage{wrapfig}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\usepackage{ulem}
+\usepackage[thinspace,mediumqspace,amssymb]{SIunits}
+
+
