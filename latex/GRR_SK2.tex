@@ -46,13 +46,32 @@ Páll \textsc{Melsted}
 
 \end{titlepage}
 
+\section {Keyrsla og virkni}
+Öll forritun fór fram í Java og notast við java version 1.6.0\_27 fyrir Windows við keyrslu og þýðingu þess. 
+Til þess að þýða forritið þarf einungis að sækja skjalið "IntervalTree.java" og þýða það með "javac IntervalTree.java"
+Forritið er aðgengilegt á \url{https://github.com/gudmundurmar/SKSKG}
+Þar er einnig að finna Stopwatch.java sem notast var við til þess að taka timann á forritinu en einnig uppgefin inntök inntök og úttök s1-s3 sem notast var við til þess að keyra forritið líkt og gefið var upp í verkefnislýsingunni. 
+\\ 	Þýðing: \texttt {\$javac IntervalTree.java}
+\\ 	Keyrsla: \texttt {\$IntervalTree < s1.in | diff -w s1.out - | wc -l}
 
+\section {Uppbygging}
+\subsection{Yfirklasinn - IntervalTree}
+\inputminted{java}{Foll.java}
 
+\subsection{Fyrsta földun - Node}
+\inputminted{java}{Node.java}
+
+\subsection{Önnur földun - Link}
+\inputminted{java}{Link.java}
+
+\pagebreak
+
+\section {Forritið í heild}
 
 \inputminted[mathescape,
                linenos,
-               numbersep=5pt,
-               gobble=2,
+               numbersep=10pt,
+               gobble=0,
                frame=lines,
                framesep=2mm]{java}{../IntervalTree.java}
 
