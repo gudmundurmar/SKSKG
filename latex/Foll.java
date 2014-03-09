@@ -19,18 +19,18 @@ public class IntervalTree {
   public void delete(int a, int b){}
 
   //Notkun: tree.intersects(a,b,root);
-  //Fyrir: a og b eru heiltölur, a < b, root er nóða
-  //Eftir: búið er að finna öll bil sem skerast á við [a,b]
+  //Fyrir: a og b eru heiltölur, a <= b, root er nóða
+  //Eftir: búið er að finna öll bil sem skerast á við [a,b] í trénu með rótina root
   public int intersects(int a, int b, Node node){}
   
-  //Notkun: tree.intersects(a,b,root);
-  //Fyrir: a og b eru heiltölur, a < b, root er nóða
-  //Eftir: búið er að finna og prenta öll bil sem skerast á við [a,b]
+  //Notkun: tree.intersects(a,b);
+  //Fyrir: a og b eru heiltölur, a <= b
+  //Eftir: búið er að finna og prenta út öll bil sem skerast á við bilið [a,b]
   public void intersects(int a, int b) {}
   
   //Notkun: tree.contains(a,b,root);
   //Fyrir: a og b eru heiltölur, a <= b, root er nóða
-  //Eftir: búið er að finna öll bil sem innihalda[a,b]
+  //Eftir: búið er að finna öll bil sem innihalda[a,b] í trénu með rótina root
   public boolean contains(int a, int b, Node node){}
 
   //Notkun: tree.contains(a,b);
@@ -54,7 +54,7 @@ public class IntervalTree {
   public void deleteNode(Node node){}
   
   //Notkun: tree.query(q);
-  //Fyrir: q er strengur sem inniheldur fyrirspurn í Interval tréð
+  //Fyrir: q er strengur sem inniheldur fyrirspurn fyrir Interval tréð
   //Eftir: Búið er að framkvæma fyrirspurnina í q.
   public void query(String query) {}
 

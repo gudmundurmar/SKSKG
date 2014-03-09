@@ -119,7 +119,7 @@ public class IntervalTree {
 
   //Notkun: tree.intersects(a,b,root);
   //Fyrir: a og b eru heiltölur, a < b, root er nóða
-  //Eftir: búið er að finna öll bil sem skerast á við [a,b]
+  //Eftir: búið er að finna öll bil sem skerast á við [a,b] í trénu með rótina root
   public int intersects(int a, int b, Node node)
   {
     if(b < a) return 0;
@@ -165,7 +165,7 @@ public class IntervalTree {
   
   //Notkun: tree.contains(a,b,root);
   //Fyrir: a og b eru heiltölur, a <= b, root er nóða
-  //Eftir: búið er að finna öll bil sem innihalda[a,b]
+  //Eftir: búið er að finna öll bil sem innihalda[a,b] í trénu með rótina root
   public boolean contains(int a, int b, Node node)
   {
     if(b < a) return false;
@@ -413,7 +413,7 @@ public class IntervalTree {
 
     //Notkun: node.findIntersections(a,b);
     //Fyrir: a og b eru heiltölur, a < b
-    //Eftir: búið er að finna öll bil sem skerast á við bilið [a,b]
+    //Eftir: búið er að finna öll bil sem skerast á við bilið [a,b] í nóðunni node
     int findIntersections(int a,int b)
     {
       Link chain = intervals;
@@ -445,7 +445,7 @@ public class IntervalTree {
     
     //Notkun: node.findContains(a,b);
     //Fyrir: a og b eru heiltölur, a < b
-    //Eftir: búið er að finna öll bil sem innihalda [a,b]
+    //Eftir: búið er að finna öll bil sem innihalda [a,b] í nóðunni node
     boolean findContains(int a,int b)
     {
       Link chain = intervals;
@@ -510,7 +510,3 @@ public class IntervalTree {
     }
   }
 }
-      
-      
-      
-      

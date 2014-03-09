@@ -25,12 +25,12 @@
 
     //Notkun: node.findIntersections(a,b);
     //Fyrir: a og b eru heiltölur, a < b
-    //Eftir: búið er að finna öll bil sem skerast á við bilið [a,b]
+    //Eftir: búið er að finna öll bil sem skerast á við bilið [a,b] í nóðunni node
     int findIntersections(int a,int b){}
     
     //Notkun: node.findContains(a,b);
     //Fyrir: a og b eru heiltölur, a < b
-    //Eftir: búið er að finna öll bil sem innihalda [a,b]
+    //Eftir: búið er að finna öll bil sem innihalda [a,b] í nóðunni node
     boolean findContains(int a,int b){}
     
     //Notkun: node.deleteInterval(a,b);
