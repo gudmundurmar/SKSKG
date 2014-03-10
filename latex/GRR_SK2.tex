@@ -52,9 +52,12 @@ Til þess að þýða forritið þarf einungis að sækja skjalið "IntervalTree
 Forritið er aðgengilegt á \url{https://github.com/gudmundurmar/SKSKG}
 Þar er einnig að finna Stopwatch.java sem notast var við til þess að taka timann á forritinu en einnig uppgefin inntök inntök og úttök s1-s3 sem notast var við til þess að keyra forritið líkt og gefið var upp í verkefnislýsingunni. 
 \\ 	Þýðing: \texttt {\$javac IntervalTree.java}
-\\ 	Keyrsla: \texttt {\$IntervalTree < s1.in | diff -w s1.out - | wc -l}
+\\ 	Keyrsla: \texttt {\$java IntervalTree < s1.in | diff -w s1.out - | wc -l}
 
 \section {Uppbygging}
+
+Tréð er byggt upp þannig að fyrsta bilið verður rótin. Ef næsta inntak skarast ekki við bilið í nóðunni og neðri mörk bilsins eru stærri en efri mörk rótarinnar fer það hægra megin, annars fer það vinstra megin í tréð. Ef bilið skarast aftur á móti við rótina fer það í tengdann lista hjá rótinni. Það sama á við um rótina og aðrar nóður í trénu. Ef bilið skarast bætist það við nóðuna í tengdum lista. Þessi lausn hefur þann vankant að ef við byrjum á því að bæta stórum bilum í tréð getum við lent í því að tréð okkar verði bara einn tengdur listi. Upprunalega vildum við notast við median bilsins til þess að raða upp í tréð en þar sem að við fengum það ekki til þess að virka rétt, vildum við frekar hafa rétta lausn sem tæki mögulega aðeins lengri tíma frekar en ranga lausn sem tæki minni tíma. Við hugsuðum líka um kosti og galla þess að notast við rauð-svört tré til þess að halda leitartíma í lágmarki en af því að við erum að við vitum ekki hvort við erum að leita oftar en við bætum í tréð og eyðum úr því, gátum við ekki sagt til um hvort við myndum græða meira á því eða hreinlega tapa á því að innleiða rautt-svart tré í lausnina okkar.
+
 \subsection{Yfirklasinn - IntervalTree}
 \inputminted{java}{Foll.java}
 

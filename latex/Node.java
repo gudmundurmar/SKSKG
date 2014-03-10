@@ -6,7 +6,7 @@
     Node left; //vinstra barn
     Node right; //hægra barn
     Node parent; //foreldri
-    Link intervals; //bilin sem skerast á við bilið í nóðunni
+    Link intervals; //bilin sem skarast á við bilið í nóðunni
     
     //FG: Lokuðu bilin í nóðunni eru geymd í tengda listanum intervals, hægra barn
     //nóðurnar er í right og vinstra barn í left. Foreldri nóðunnar er parent. 
@@ -15,7 +15,7 @@
     
     static class Link 
     {
-    	//Sjá næstu földun í skjalinu
+      //Sjá næstu földun í skjalinu
     }
     
     //Notkun: node.insertInterval(a,b);
@@ -25,7 +25,7 @@
 
     //Notkun: node.findIntersections(a,b);
     //Fyrir: a og b eru heiltölur, a < b
-    //Eftir: búið er að finna öll bil sem skerast á við bilið [a,b] í nóðunni node
+    //Eftir: búið er að finna öll bil sem skarast á við bilið [a,b] í nóðunni node
     int findIntersections(int a,int b){}
     
     //Notkun: node.findContains(a,b);

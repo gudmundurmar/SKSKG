@@ -20,12 +20,12 @@ public class IntervalTree {
 
   //Notkun: tree.intersects(a,b,root);
   //Fyrir: a og b eru heiltölur, a <= b, root er nóða
-  //Eftir: búið er að finna öll bil sem skerast á við [a,b] í trénu með rótina root
+  //Eftir: búið er að finna öll bil sem skarast á við [a,b] í trénu með rótina root
   public int intersects(int a, int b, Node node){}
   
   //Notkun: tree.intersects(a,b);
   //Fyrir: a og b eru heiltölur, a <= b
-  //Eftir: búið er að finna og prenta út öll bil sem skerast á við bilið [a,b]
+  //Eftir: búið er að finna og prenta út öll bil sem skarast á við bilið [a,b]
   public void intersects(int a, int b) {}
   
   //Notkun: tree.contains(a,b,root);
@@ -60,9 +60,7 @@ public class IntervalTree {
 
   //nóðurnar í trénu
   static class Node 
-  { 
-    //undirklasar (sjá frekar hér að neðan)
-  }
+  { /*Sjá næstu földunarhæð hér að neðan*/  }
     
   public static void main(String[] args)
   {
