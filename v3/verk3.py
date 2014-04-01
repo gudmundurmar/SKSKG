@@ -1,5 +1,5 @@
 
-def test(filename):
+def inputToDict(filename):
     dict = {}
     file = open(filename).readlines()
     for line in file:
