@@ -26,13 +26,15 @@ def MSTPRIM(G,w,r):
     r[0] = 0
     Q =  priority_dict(G);
     while Q:
-
-        print Q
+        Q._rebuild_heap()
+        #print Q
         
         u = Q.smallest()
         print u
         w += int(Q[u][0])
         u = Q.pop_smallest()
+
+        #print u
 
         for v in G[u]:
             if isinstance(v, list):

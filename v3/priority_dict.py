@@ -33,6 +33,7 @@ class priority_dict(dict):
         v, k = heap[0]
         while k not in self or self[k] != v:
             heappop(heap)
+            print heap[0]
             v, k = heap[0]
         return k
 
@@ -85,7 +86,7 @@ class priority_dict(dict):
         while self:
             yield self.pop_smallest()
 
-#gdict = {3:[1,2,3,9],1:[4,1,1,1],4:[2,1,1,1]};
+#gdict = {'2': [8.0, '1', ['1', '8'], ['3', '7'], ['8', '2'], ['5', '4']],'6': [1.0, '7', ['5', '2'], ['7', '1'], ['8', '6']]};
 
 #for u in gdict:
 
