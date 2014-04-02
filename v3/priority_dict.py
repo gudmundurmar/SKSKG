@@ -85,29 +85,33 @@ class priority_dict(dict):
         while self:
             yield self.pop_smallest()
 
-gdict = {};
+#gdict = {3:[1,2,3,9],1:[4,1,1,1],4:[2,1,1,1]};
 
-pg =  priority_dict(gdict);
+#for u in gdict:
 
-G = {};
+#pg =  priority_dict(gdict);
 
-u = 0;
+#print pg.smallest();
 
-G[u] = {(1,5),(2,7)};
+#G = {};
 
-pg.setdefault(u, 5);
-pg.setdefault(1, 3);
-pg.setdefault(2, 2);
-pg.setdefault(3, 8);
+#u = 0;
+
+#G[u] = {(1,5),(2,7)};
+
+#pg.setdefault(u, 5);
+#pg.setdefault(1, 3);
+#pg.setdefault(2, 2);
+#pg.setdefault(3, 8);
 
 
 
-print pg.smallest();
+#print pg.smallest();
 
 #update priority
-pg[2] = 5;
+#pg[2] = 5;
 
-print pg.smallest();
+#print pg.smallest();
 
 
 
