@@ -1,6 +1,7 @@
 # -*- coding: cp1252 -*-
 from priority_dict import priority_dict
 
+
 listi = []
 b = False
 
@@ -23,7 +24,8 @@ def inputToDict(filename):
     weight = MSTPRIM(dict,0, dict['0']); 
     print weight
 
-    listi.sort()
+    #listi.remove([None, '0'])
+    listi.sort(key= lambda x:int(x[0]))
     for x in range(1,len(listi)):
         
         dict = {}
@@ -55,7 +57,7 @@ def MSTPRIM(G,w,r):
         #print u
         global b
         if not b:
-            if u[0]<u[1]:
+            if not u[0]==None and int(u[0])<int(u[1]):
                 listi.append(u)
             else:
                 v = [u[1],u[0]]
@@ -79,4 +81,4 @@ def MSTPRIM(G,w,r):
         
 
 
-inputToDict("test.in")
+inputToDict("100.in")
