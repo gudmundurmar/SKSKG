@@ -1,6 +1,8 @@
 # -*- coding: cp1252 -*-
 from priority_dict import priority_dict
 
+listi = []
+b = False
 
 def inputToDict(filename):
     dict = {}
@@ -11,7 +13,7 @@ def inputToDict(filename):
         if len(split) > 1:
             if '\n' in split[2]:
                 split[2] = split[2][:-1]
-                
+        
             dict[split[0]].append([split[1],split[2]])
             dict[split[1]].append([split[0],split[2]])
         else:
@@ -19,19 +21,46 @@ def inputToDict(filename):
                 dict[str(i)] = [float("inf"), None]
 
     weight = MSTPRIM(dict,0, dict['0']); 
-    return weight
+    print weight
+
+    listi.sort()
+    for x in range(1,len(listi)):
+        
+        dict = {}
+        for line in file:
+            split = line.split(" ")
+            if len(split) > 1:
+                if '\n' in split[2]:
+                    split[2] = split[2][:-1]
+                if not(split[0]==listi[x][0] and split[1]==listi[x][1]):
+                    dict[split[0]].append([split[1],split[2]])
+                    dict[split[1]].append([split[0],split[2]])
+            else:
+                for i in range(0, int(split[0][:-1])):
+                    dict[str(i)] = [float("inf"), None]
+
+        weight = MSTPRIM(dict,0, dict['0']); 
+        print listi[x][0],listi[x][1], weight
 
 
 def MSTPRIM(G,w,r):
     r[0] = 0
+    
     Q =  priority_dict(G);
     while Q:
         Q._rebuild_heap()
         #print Q
         
         u = Q.smallest()
-        print u
-        w += int(Q[u][0])
+        #print u
+        global b
+        if not b:
+            if u[0]<u[1]:
+                listi.append(u)
+            else:
+                v = [u[1],u[0]]
+                listi.append(v)
+        w += int(Q[u[1]][0])
         u = Q.pop_smallest()
 
         #print u
@@ -43,10 +72,11 @@ def MSTPRIM(G,w,r):
                     if float(v[1]) < float(Q[v[0]][0]):
                         Q[v[0]][1] = u
                         Q[v[0]][0] = float(v[1])
-
+                        
+    b = True               
     return w    
     
         
 
 
-print inputToDict("test.in")
+inputToDict("test.in")
