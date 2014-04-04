@@ -31,9 +31,11 @@ class priority_dict(dict):
         
         heap = self._heap
         v, k = heap[0]
-    
-        #print v[1], k
-        return [v[1], k]
+        while k not in self or self[k] != v:
+            heappop(heap)
+            print heap[0]
+            v, k = heap[0]
+        return [v[1],k]
 
     def pop_smallest(self):
         """Return the item with the lowest priority and remove it.
@@ -43,7 +45,8 @@ class priority_dict(dict):
         
         heap = self._heap
         v, k = heappop(heap)
-
+        while k not in self or self[k] != v:
+            v, k = heappop(heap)
         del self[k]
         return k
 

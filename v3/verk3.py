@@ -25,8 +25,17 @@ def inputToDict(filename):
     print weight
 
     #listi.remove([None, '0'])
-    listi.sort(key= lambda x:int(x[0]))
-    for x in range(1,len(listi)):
+    
+    global listi
+    
+    for i in range(len(listi)):
+       listi[i] = map(int,listi[i])
+    listi.sort()
+    for i in range(len(listi)):
+       listi[i] = map(str,listi[i])
+
+    #print listi
+    for x in range(len(listi)):
         
         dict = {}
         for line in file:
@@ -57,11 +66,12 @@ def MSTPRIM(G,w,r):
         #print u
         global b
         if not b:
-            if not u[0]==None and int(u[0])<int(u[1]):
-                listi.append(u)
-            else:
-                v = [u[1],u[0]]
-                listi.append(v)
+            if not u[0]==None:
+                if int(u[0])<int(u[1]):
+                    listi.append(u)
+                else:
+                    v = [u[1],u[0]]
+                    listi.append(v)
         w += int(Q[u[1]][0])
         u = Q.pop_smallest()
 
@@ -81,4 +91,4 @@ def MSTPRIM(G,w,r):
         
 
 
-inputToDict("100.in")
+inputToDict("1k.in")
