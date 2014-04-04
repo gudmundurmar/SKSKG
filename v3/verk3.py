@@ -27,7 +27,6 @@ def inputToDict(filename):
     weight = MSTPRIM(dict,0, dict['0']);
     print weight
     NotMinPRIM(weight)
-    #return weight
 
 
 def MSTPRIM(G,w,r):
@@ -68,21 +67,27 @@ def NotMinPRIM(w):
     global Span
     global notSpan
 
-    print Span
+    count = 0
 
     check = 0
     minEdge = [-1,-1,float("inf")]
     checkedVertices = []
-    output = ""
+    output = []
     invalidMin = True
+
+    notSmallestSpans = {}
 
     for e in Span:
 
-        
-        
         newWeight = w-e[2]
         check = 1
-        output = str(e[0])+" "+str(e[1])+" "
+
+        if e[0] < e[1]:
+            output = [int(e[0]),int(e[1])]
+        else:
+            output = [int(e[1]),int(e[0])]
+        
+        #output = str(e[0])+" "+str(e[1])+" "
         for v in Span:
             if str(e[1]) == str(v[0]):
                 check = 0
@@ -98,46 +103,43 @@ def NotMinPRIM(w):
                 if float(notUsed[2]) < float(minEdge[2]):
                     invalidMin = False
                     minEdge = notUsed
-        print checkedVertices
-        #print "this is e: "+str(e)
-        #print notSpan
-        #print minEdge
 
         newWeight += int(minEdge[2])
-        output += str(newWeight)
+        output.append(str(newWeight))
 
-        print output
+        notSmallestSpans[count] = output
 
-        for i in notSpan:
-            print i
+        count += 1
+        
+        toRemove = []
 
-        print "this is span: "+str(notSpan)
 
         for nUsed in notSpan:
-            print nUsed
             if (nUsed[0] in checkedVertices) and (nUsed[1] in checkedVertices):
-                #print "to remove: "+str(notUsed)
-                notSpan.remove(nUsed);
+                toRemove.append(nUsed)
                 if nUsed == minEdge:
                     invalidMin = True
                     minEdge = [-1,-1,float("inf")]
                     
+        for remove in toRemove:
+            notSpan.remove(remove)
+                    
         if invalidMin:
             for findMin in notSpan:
-                    if float(findMin[2]) < minEdge[2]:
+                    if float(findMin[2]) < float(minEdge[2]):
                         invalidMin = False            
                         minEdge = findMin
-        
 
+
+        #Span.remove(e)
+
+    
+        
+    Q =  priority_dict(notSmallestSpans);
+    while Q:
+        vertex = Q.smallest()
+        print str(Q[vertex][0])+" "+str(Q[vertex][1])+" "+Q[vertex][2]
+        vertex = Q.pop_smallest()
                 
 
-        
-
-        
-                
-        
-                
-        
-
-
-inputToDict("test.in")
+inputToDict("10.in")
