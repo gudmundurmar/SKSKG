@@ -5,15 +5,11 @@ from Queue import *
 notSpan = []
 Span = []
 
-notSpan = []
-Span = []
-
-
 def inputToDict(filename):
     global notSpan
     global Span
     dict = {}
-    count = {}
+
     file = open(filename).readlines()
     for line in file:
         split = line.split(" ")
@@ -29,11 +25,11 @@ def inputToDict(filename):
             for i in range(0, int(split[0][:-1])):
                 dict[str(i)] = [float("inf"), float("inf"), None, []]
 
-    weight = MSTPRIM(dict,0, dict['0']);
+    #weight = MSTPRIM(dict,0, dict['0']);
     print weight
     #print dict
     #maxx = BFSFillMax(dict,weight)
-    NotMinPRIM(dict, weight)
+    #NotMinPRIM(dict, weight)
     #MaxPrims(dict, maxx)
 
 
@@ -143,7 +139,7 @@ def NotMinPRIM(G,w):
     shortest = {}
 
         
-        toRemove = []
+    toRemove = []
 
     for e in tree:
         if not(str(e) == str(0)):
