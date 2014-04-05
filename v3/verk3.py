@@ -1,5 +1,9 @@
 # -*- coding: cp1252 -*-
 from priority_dict import priority_dict
+from Queue import *
+
+notSpan = []
+Span = []
 
 notSpan = []
 Span = []
@@ -16,130 +20,151 @@ def inputToDict(filename):
         if len(split) > 1:
             if '\n' in split[2]:
                 split[2] = split[2][:-1]
-                
+       
             dict[split[0]].append([split[1],split[2]])
             dict[split[1]].append([split[0],split[2]])
+
             notSpan.append([split[0],split[1],split[2]])
         else:
             for i in range(0, int(split[0][:-1])):
-                dict[str(i)] = [float("inf"), None]
+                dict[str(i)] = [float("inf"), float("inf"), None, []]
 
     weight = MSTPRIM(dict,0, dict['0']);
     print weight
-    NotMinPRIM(weight)
+    #print dict
+    #maxx = BFSFillMax(dict,weight)
+    NotMinPRIM(dict, weight)
+    #MaxPrims(dict, maxx)
+
+
+tree = []
 
 
 def MSTPRIM(G,w,r):
-    global notSpan
+    global tree
     global Span
 
-    
     r[0] = 0
+
+    next = 0
+
+    tree = []
+    Span = []
+    
     Q =  priority_dict(G);
     while Q:
         Q._rebuild_heap()
         
         u = Q.smallest()
 
-        if(not(int(u) == 0)):
-            if(int(u) < int(Q[u][1])):
-                Span.append([Q[u][1],u,int(Q[u][0])])
-                notSpan.remove([str(u),str(Q[u][1]),str(int(Q[u][0]))])
-            else:
-                Span.append([Q[u][1],u,int(Q[u][0])])
-                notSpan.remove([str(Q[u][1]),str(u),str(int(Q[u][0]))])
         
         w += int(Q[u][0])
-        u = Q.pop_smallest()
         
-        for v in G[u]:
-            if isinstance(v, list):
-                stri = str(v[0])
-                if v[0] in Q:
-                    if float(v[1]) < float(Q[v[0]][0]):
-                        Q[v[0]][1] = u
-                        Q[v[0]][0] = float(v[1])
+        u = Q.pop_smallest()
 
+
+        #finnur næst besta 
+
+        print next
+        #if not(u == next):
+        if Q:
+            next = Q.smallest()
+            secondBest = G[next][0]
+
+        Span.append(secondBest)
+
+        
+        print u
+        print Span
+        print ""
+
+        tree.append(u)
+        
+        #print u
+        for v in range(4,len(G[u])):
+            ver = G[u][v]
+            #print ver
+            #print Q
+            if ver[0] in Q:
+                if float(ver[1]) < float(Q[ver[0]][0]):
+                    Q[ver[0]][2] = u
+                    G[ver[0]][2] = u
+
+                    """if float(G[u][0]) == float(0):
+                        G[u][0] = float(ver[1])"""
+                        
+                    #setur það sem var best í næst besta
+                    """Q[ver[0]][1] = Q[ver[0]][0]
+                    G[ver[0]][1] = Q[ver[0]][0]"""
+
+                    #setur nýja besta
+                    Q[ver[0]][0] = float(ver[1])
+                    G[ver[0]][0] = float(ver[1])
+                """elif float(ver[1]) < float(Q[ver[0]][1]):
+                    #ef að það þarf bara að breyta næstbesta
+                    Q[ver[0]][1] = float(ver[1])
+                    G[ver[0]][1] = float(ver[1])"""
+
+        
+
+            
+    #print G#print G
+    print tree
+
+    """for i in range(1,len(tree)):
+        if G[tree[i]][2] > tree[i]:
+            Span.append([tree[i],G[tree[i]][2]])
+        else:
+            Span.append([G[tree[i]][2], tree[i]])
+        G[str(G[tree[i]][2])][3].append(tree[i])
+
+    for i in range(1,len(tree)):
+        G[str(tree[i])][3].append(str(G[tree[i]][2]))"""
+
+    #print Span
+    """for u in tree:
+        if float(G[ver[0]][0]) < float(ver[1]):
+            if float(ver[1]) < float(G[ver[0]][1]):
+                G[ver[0]][1] = float(ver[1])"""
+
+    #færa gildi frá barni yfir til foreldris, ef það er til styttri leið
+
+    
     return w    
 
 
-def NotMinPRIM(w):
-    global Span
-    global notSpan
 
-    count = 0
+def NotMinPRIM(G,w):
 
-    check = 0
-    minEdge = [-1,-1,float("inf")]
-    checkedVertices = []
-    output = []
-    invalidMin = True
+    
+    cnt = 0
+    nrSecond = 1
 
-    notSmallestSpans = {}
+    shortest = {}
 
-    for e in Span:
-
-        newWeight = w-e[2]
-        check = 1
-
-        if e[0] < e[1]:
-            output = [int(e[0]),int(e[1])]
-        else:
-            output = [int(e[1]),int(e[0])]
-        
-        #output = str(e[0])+" "+str(e[1])+" "
-        for v in Span:
-            if str(e[1]) == str(v[0]):
-                check = 0
-
-        if(check == 1):
-            checkedVertices.append(str(e[0]))
-            checkedVertices.append(str(e[1]))
-        else:
-            checkedVertices.append(str(e[0]))
-
-        for notUsed in notSpan:
-            if e[check] == notUsed[0] or e[check] == notUsed[1]:
-                if float(notUsed[2]) < float(minEdge[2]):
-                    invalidMin = False
-                    minEdge = notUsed
-
-        newWeight += int(minEdge[2])
-        output.append(str(newWeight))
-
-        notSmallestSpans[count] = output
-
-        count += 1
         
         toRemove = []
 
+    for e in tree:
+        if not(str(e) == str(0)):
+            weight = w-G[e][0]+Span[nrSecond]
+            nrSecond += 1
+            if(e < G[e][2]):
+                shortest[cnt] = [int(e), int(G[e][2]), int(weight)]
+            else:
+                shortest[cnt] = [int(G[e][2]), int(e), int(weight)]
+            cnt += 1
 
-        for nUsed in notSpan:
-            if (nUsed[0] in checkedVertices) and (nUsed[1] in checkedVertices):
-                toRemove.append(nUsed)
-                if nUsed == minEdge:
-                    invalidMin = True
-                    minEdge = [-1,-1,float("inf")]
-                    
-        for remove in toRemove:
-            notSpan.remove(remove)
-                    
-        if invalidMin:
-            for findMin in notSpan:
-                    if float(findMin[2]) < float(minEdge[2]):
-                        invalidMin = False            
-                        minEdge = findMin
+    Q =  priority_dict(shortest);
 
-
-        #Span.remove(e)
-
+    while Q:
+        u = Q.smallest()
+        print str(Q[u][0])+" "+str(Q[u][1])+" "+str(Q[u][2])
+        u = Q.pop_smallest()
     
         
-    Q =  priority_dict(notSmallestSpans);
-    while Q:
-        vertex = Q.smallest()
-        print str(Q[vertex][0])+" "+str(Q[vertex][1])+" "+Q[vertex][2]
-        vertex = Q.pop_smallest()
                 
 
-inputToDict("10.in")
+
+inputToDict("simple.in")
+
