@@ -1,6 +1,7 @@
 # -*- coding: cp1252 -*-
 from priority_dict import priority_dict
 from Queue import *
+import time
 
 notSpan = []
 Span = []
@@ -24,7 +25,7 @@ def inputToDict(filename):
             notSpan.append([int(split[2]),split[0],split[1]])
         else:
             for i in range(0, int(split[0][:-1])):
-                dict[str(i)] = [float("inf"), float("inf"), None, []]
+                dict[str(i)] = [float("inf"), None, []]
 
     
     notSpan.sort(reverse=True)
@@ -50,12 +51,11 @@ def MSTPRIM(G,w,r):
         
         u = Q.smallest()
 
-        #print Q
-        if not(Q[u][2] is None):
-            if(int(u) < int(Q[u][2])):
-                notSpan.remove([int(Q[u][0]), u,Q[u][2]])
+        if not(Q[u][1] is None):
+            if(int(u) < int(Q[u][1])):
+                notSpan.remove([int(Q[u][0]), u,Q[u][1]])
             else:
-                notSpan.remove([int(Q[u][0]), Q[u][2], u])
+                notSpan.remove([int(Q[u][0]), Q[u][1], u])
         
         w += int(Q[u][0])
         
@@ -64,15 +64,12 @@ def MSTPRIM(G,w,r):
 
         tree.append(u)
         
-        #print u
-        for v in range(4,len(G[u])):
+        for v in range(3,len(G[u])):
             ver = G[u][v]
-            #print ver
-            #print Q
             if ver[0] in Q:
                 if float(ver[1]) < float(Q[ver[0]][0]):
-                    Q[ver[0]][2] = u
-                    G[ver[0]][2] = u
+                    Q[ver[0]][1] = u
+                    G[ver[0]][1] = u
 
                     if float(G[u][0]) == float(0):
                         G[u][0] = float(ver[1])
@@ -83,7 +80,7 @@ def MSTPRIM(G,w,r):
     
 
     for i in range(1,len(tree)):
-        G[str(G[tree[i]][2])][3].append(tree[i])
+        G[str(G[tree[i]][1])][2].append(tree[i])
 
     
     return w    
@@ -99,29 +96,25 @@ def NotMinPRIM(G,w):
 
     shortest = {}
 
-    print notSpan
 
     for i in range(1,len(tree)):
         
         node = tree[i]
 
-        context = doubleBFS(G, node, G[node][2])
-        print context
+        context = doubleBFS(G, node, G[node][1])
         
         for j in range(0,len(notSpan)):
             cur = len(notSpan)-1-j
             if notSpan[cur][1] in context and notSpan[cur][2] in context:
                 continue
             elif notSpan[cur][1] in context or notSpan[cur][2] in context:
-                print node+" "+G[node][2]
-                print notSpan[cur][0]
                 weight = w-G[node][0]+notSpan[cur][0]
                 break
         
-        if(int(node) < int(G[node][2])):
-            shortest[cnt] = [int(node), int(G[node][2]), int(weight)]
+        if(int(node) < int(G[node][1])):
+            shortest[cnt] = [int(node), int(G[node][1]), int(weight)]
         else:
-            shortest[cnt] = [int(G[node][2]), int(node), int(weight)]
+            shortest[cnt] = [int(G[node][1]), int(node), int(weight)]
         cnt += 1
         
 
@@ -142,11 +135,11 @@ def doubleBFS(G,u,v):
     
     while treeU and treeV:
         curU = treeU.pop()
-        for adjU in G[curU][3]:
+        for adjU in G[curU][2]:
             treeU.append(adjU)
             contextU.append(adjU)
         curV = treeV.pop()
-        for adjV in G[curV][3]:
+        for adjV in G[curV][2]:
             treeV.append(adjV)
             contextV.append(adjV)
 
@@ -160,5 +153,6 @@ def doubleBFS(G,u,v):
         
     
                 
-
-inputToDict("10.in")
+start_time = time.time()
+inputToDict("10k.in")
+print time.time() - start_time, "seconds"
