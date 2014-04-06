@@ -33,17 +33,24 @@ def MinimumSpanningTree(G):
 
 def inputToDict(filename):
 
+<<<<<<< HEAD
     
     
     file = open(filename).readlines()
 
     dict = []
     maximum = 0
+=======
+    dict = {}
+    
+    file = open(filename).readlines()
+>>>>>>> origin/Kruskal
     for line in file:
         split = line.split(" ")
         if len(split) > 1:
             if '\n' in split[2]:
                 split[2] = split[2][:-1]
+<<<<<<< HEAD
             #print "'{0}', '{1}', '{2}', '{3}'".format("line", split[0], split[1], split[2])    
             dict.append([split[0],split[1],split[2]])
             if split[0] > maximum: maximum = int(split[0])
@@ -73,3 +80,18 @@ def inputToDict(filename):
 g = inputToDict("simple.in")
 x = MinimumSpanningTree(g)
 print x
+=======
+                
+            dict[split[0]][split[1]] = split[2]
+            dict[split[1]][[split[0]] = split[2]
+            notSpan.append([split[0],split[1],split[2]])
+        else:
+            for i in range(0, int(split[0][:-1])):
+                dict[str(i)] = {}
+    return dict
+
+
+g = inputToDict("10.in")
+#x = MinimumSpanningTree(g)
+#print x
+>>>>>>> origin/Kruskal
