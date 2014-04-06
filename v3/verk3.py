@@ -5,10 +5,11 @@ import time
 
 notSpan = []
 Span = []
+wholeNet = []
 
 
 def inputToDict(filename):
-    global notSpan
+    global wholeNet
     global Span
     dict = {}
     count = {}
@@ -22,13 +23,13 @@ def inputToDict(filename):
             dict[split[0]].append([split[1], split[2]])
             dict[split[1]].append([split[0], split[2]])
                            
-            notSpan.append([int(split[2]),split[0],split[1]])
+            wholeNet.append([int(split[2]),split[0],split[1]])
         else:
             for i in range(0, int(split[0][:-1])):
                 dict[str(i)] = [float("inf"), None, []]
 
     
-    notSpan.sort(reverse=True)
+    wholeNet.sort(reverse=True)
     weight = MSTPRIM(dict,0, dict['0']);
     print weight
     NotMinPRIM(dict, weight)
@@ -38,6 +39,8 @@ tree = []
 
 def MSTPRIM(G,w,r):
     global tree
+    global wholeNet
+    global Span
     global notSpan
     r[0] = 0
 
@@ -49,17 +52,20 @@ def MSTPRIM(G,w,r):
     while Q:
         Q._rebuild_heap()
         
-        u = Q.smallest()
-
-        if not(Q[u][1] is None):
-            if(int(u) < int(Q[u][1])):
-                notSpan.remove([int(Q[u][0]), u,Q[u][1]])
-            else:
-                notSpan.remove([int(Q[u][0]), Q[u][1], u])
-        
-        w += int(Q[u][0])
-        
         u = Q.pop_smallest()
+
+        if not(G[u][1] is None):
+            if(int(u) < int(G[u][1])):
+                Span.append([int(G[u][0]), u,G[u][1]])
+                #notSpan[:] = (name for name in notSpan if name != [int(G[u][0]), u,G[u][1]])
+                #notSpan.remove([int(G[u][0]), u,G[u][1]])
+            else:
+                Span.append([int(G[u][0]), G[u][1], u])
+                #notSpan[:] = (name for name in notSpan if name != [int(G[u][0]), G[u][1], u])
+                #notSpan.remove([int(G[u][0]), G[u][1], u])
+        w += int(G[u][0])
+
+        
 
 
         tree.append(u)
@@ -87,7 +93,14 @@ def MSTPRIM(G,w,r):
 
 
 def NotMinPRIM(G,w):
+    global notSpan
+    global Span
 
+    Span.sort(reverse=True)
+
+    for e in wholeNet:
+        if not(e in Span):
+            notSpan.append(e)
     
     cnt = 0
     nrSecond = 1
@@ -154,5 +167,5 @@ def doubleBFS(G,u,v):
     
                 
 start_time = time.time()
-inputToDict("10k.in")
+inputToDict("1k.in")
 print time.time() - start_time, "seconds"
