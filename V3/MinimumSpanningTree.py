@@ -70,6 +70,6 @@ def inputToDict(filename):
     return d_arr
 
 
-g = inputToDict("1k.in")
+g = inputToDict("simple.in")
 x = MinimumSpanningTree(g)
 print x
