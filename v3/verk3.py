@@ -21,55 +21,46 @@ def inputToDict(filename):
             dict[split[0]].append([split[1], split[2]])
             dict[split[1]].append([split[0], split[2]])
                            
-            notSpan.append([split[0],split[1],split[2]])
+            notSpan.append([int(split[2]),split[0],split[1]])
         else:
             for i in range(0, int(split[0][:-1])):
                 dict[str(i)] = [float("inf"), float("inf"), None, []]
 
+    
+    notSpan.sort(reverse=True)
     weight = MSTPRIM(dict,0, dict['0']);
     print weight
-    #print dict
-    #maxx = BFSFillMax(dict,weight)
     NotMinPRIM(dict, weight)
-    #MaxPrims(dict, maxx)
 
 tree = []
 
 
 def MSTPRIM(G,w,r):
     global tree
-    global Span
+    global notSpan
     r[0] = 0
 
-    next = 0
+
 
     tree = []
-    Span = []
     
     Q =  priority_dict(G);
     while Q:
         Q._rebuild_heap()
         
         u = Q.smallest()
+
+        #print Q
+        if not(Q[u][2] is None):
+            if(int(u) < int(Q[u][2])):
+                notSpan.remove([int(Q[u][0]), u,Q[u][2]])
+            else:
+                notSpan.remove([int(Q[u][0]), Q[u][2], u])
         
         w += int(Q[u][0])
         
         u = Q.pop_smallest()
 
-        #finnur næst besta 
-
-        print next
-        #if not(u == next):
-        if Q:
-            next = Q.smallest()
-            secondBest = G[next][0]
-
-        Span.append(secondBest)
-
-        
-        print u
-        print Span
-        print ""
 
         tree.append(u)
         
@@ -83,42 +74,16 @@ def MSTPRIM(G,w,r):
                     Q[ver[0]][2] = u
                     G[ver[0]][2] = u
 
-                    """if float(G[u][0]) == float(0):
-                        G[u][0] = float(ver[1])"""
-                        
-                    #setur það sem var best í næst besta
-                    """Q[ver[0]][1] = Q[ver[0]][0]
-                    G[ver[0]][1] = Q[ver[0]][0]"""
+                    if float(G[u][0]) == float(0):
+                        G[u][0] = float(ver[1])
 
                     #setur nýja besta
                     Q[ver[0]][0] = float(ver[1])
                     G[ver[0]][0] = float(ver[1])
-                """elif float(ver[1]) < float(Q[ver[0]][1]):
-                    #ef að það þarf bara að breyta næstbesta
-                    Q[ver[0]][1] = float(ver[1])
-                    G[ver[0]][1] = float(ver[1])"""
-
-            
-    #print G#print G
-    print tree
-
-    """for i in range(1,len(tree)):
-        if G[tree[i]][2] > tree[i]:
-            Span.append([tree[i],G[tree[i]][2]])
-        else:
-            Span.append([G[tree[i]][2], tree[i]])
-        G[str(G[tree[i]][2])][3].append(tree[i])
+    
 
     for i in range(1,len(tree)):
-        G[str(tree[i])][3].append(str(G[tree[i]][2]))"""
-
-    #print Span
-    """for u in tree:
-        if float(G[ver[0]][0]) < float(ver[1]):
-            if float(ver[1]) < float(G[ver[0]][1]):
-                G[ver[0]][1] = float(ver[1])"""
-
-    #færa gildi frá barni yfir til foreldris, ef það er til styttri leið
+        G[str(G[tree[i]][2])][3].append(tree[i])
 
     
     return w    
@@ -130,18 +95,35 @@ def NotMinPRIM(G,w):
     cnt = 0
     nrSecond = 1
 
-    shortest = {}
-        
+    weight = 0
 
-    for e in tree:
-        if not(str(e) == str(0)):
-            weight = w-G[e][0]+Span[nrSecond]
-            nrSecond += 1
-            if(e < G[e][2]):
-                shortest[cnt] = [int(e), int(G[e][2]), int(weight)]
-            else:
-                shortest[cnt] = [int(G[e][2]), int(e), int(weight)]
-            cnt += 1
+    shortest = {}
+
+    print notSpan
+
+    for i in range(1,len(tree)):
+        
+        node = tree[i]
+
+        context = doubleBFS(G, node, G[node][2])
+        print context
+        
+        for j in range(0,len(notSpan)):
+            cur = len(notSpan)-1-j
+            if notSpan[cur][1] in context and notSpan[cur][2] in context:
+                continue
+            elif notSpan[cur][1] in context or notSpan[cur][2] in context:
+                print node+" "+G[node][2]
+                print notSpan[cur][0]
+                weight = w-G[node][0]+notSpan[cur][0]
+                break
+        
+        if(int(node) < int(G[node][2])):
+            shortest[cnt] = [int(node), int(G[node][2]), int(weight)]
+        else:
+            shortest[cnt] = [int(G[node][2]), int(node), int(weight)]
+        cnt += 1
+        
 
     Q =  priority_dict(shortest);
 
@@ -150,7 +132,33 @@ def NotMinPRIM(G,w):
         print str(Q[u][0])+" "+str(Q[u][1])+" "+str(Q[u][2])
         u = Q.pop_smallest()
     
+
+def doubleBFS(G,u,v):
+    contextU = [u]
+    contextV = [v]
+
+    treeU = [u]
+    treeV = [v]
+    
+    while treeU and treeV:
+        curU = treeU.pop()
+        for adjU in G[curU][3]:
+            treeU.append(adjU)
+            contextU.append(adjU)
+        curV = treeV.pop()
+        for adjV in G[curV][3]:
+            treeV.append(adjV)
+            contextV.append(adjV)
+
+    result = []
+
+    if len(contextU) < len(contextV):
+        return contextU
+    else:
+        return contextV
         
+        
+    
                 
 
-inputToDict("simple.in")
+inputToDict("10.in")
