@@ -22,13 +22,13 @@ def inputToDict(filename):
             dict[split[0]].append([split[1], split[2]])
             dict[split[1]].append([split[0], split[2]])
                            
-            wholeNet.append([int(split[2]),split[0],split[1]])
+            wholeNet.append([int(split[2]),split[0],split[1], False])
         else:
             for i in range(0, int(split[0][:-1])):
                 dict[str(i)] = [float("inf"), None, []]
 
     
-    wholeNet.sort(reverse=True)
+    wholeNet.sort()
     weight = MSTPRIM(dict,0, dict['0']);
     print weight
     NotMinPRIM(dict, weight)
@@ -55,11 +55,11 @@ def MSTPRIM(G,w,r):
 
         if not(G[u][1] is None):
             if(int(u) < int(G[u][1])):
-                Span.append([int(G[u][0]), u,G[u][1]])
+                Span.append([int(G[u][0]), u,G[u][1], False])
                 #notSpan[:] = (name for name in notSpan if name != [int(G[u][0]), u,G[u][1]])
                 #notSpan.remove([int(G[u][0]), u,G[u][1]])
             else:
-                Span.append([int(G[u][0]), G[u][1], u])
+                Span.append([int(G[u][0]), G[u][1], u, False])
                 #notSpan[:] = (name for name in notSpan if name != [int(G[u][0]), G[u][1], u])
                 #notSpan.remove([int(G[u][0]), G[u][1], u])
         w += int(G[u][0])
@@ -97,9 +97,16 @@ def NotMinPRIM(G,w):
 
     Span.sort()
 
-    for e in wholeNet:
-        if binary_search(Span, e) == -1:
-            notSpan.append(e)
+    for e in Span:
+        res = binary_search(wholeNet, e)
+        if not(res == -1):
+            wholeNet[res][3] = True
+            
+
+    for e in range(0,len(wholeNet)):
+        cur = len(wholeNet)-1-e
+        if not(wholeNet[cur][3]):
+            notSpan.append(wholeNet[cur])
     
     cnt = 0
     nrSecond = 1
