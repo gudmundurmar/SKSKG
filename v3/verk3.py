@@ -2,7 +2,7 @@
 from priority_dict import priority_dict
 from bisect import bisect_left
 import time
-import re
+import sys
 
 class verk3:
     def __init__(self):
@@ -14,27 +14,21 @@ class verk3:
     def inputToDict(self,filename):
         dict = {}
         
-        file = open(filename, "r").readlines()
+        length = int(sys.stdin.readline())
+        file = sys.stdin.readlines()
+        for i in range(0, length):
+            dict[str(i)] = [float("inf"), None, []]
         for line in file:
-            split = line.split(" ")
-            if len(split) > 1:
-                if '\n' in split[2]:
-                    split[2] = split[2][:-1]
-                    
-                dict[split[0]].append([split[1], split[2]])
-                dict[split[1]].append([split[0], split[2]])
-                               
-                self.wholeNet.append([int(split[2]),split[0],split[1], False])
-            else:
-                for i in range(0, int(split[0][:-1])):
-                    dict[str(i)] = [float("inf"), None, []]
-                print dict
+            
+            split = line.split(" ")                   
+            dict[split[0]].append([split[1], split[2]])
+            dict[split[1]].append([split[0], split[2]])
+            self.wholeNet.append([int(split[2]),split[0],split[1], False])
 
-        
         self.wholeNet.sort()
         weight = self.MSTPRIM(dict,0, dict['0']);
         print weight
-        print dict
+        #print dict
         self.NotMinPRIM(dict, weight)
 
     
@@ -130,7 +124,7 @@ class verk3:
 
         while Q:
             u = Q.smallest()
-            #print str(Q[u][0])+" "+str(Q[u][1])+" "+str(Q[u][2])
+            print str(Q[u][0])+" "+str(Q[u][1])+" "+str(Q[u][2])
             u = Q.pop_smallest()
 
 def doubleBFS(G,u,v):
@@ -167,6 +161,6 @@ def binary_search(a, x, lo=0, hi=None):   # can't use a to specify default for h
 if __name__ == '__main__':
     start_time = time.time()
     V3 = verk3()
-    V3.inputToDict("simple.in")
+    V3.inputToDict("10k.in")
     print time.time() - start_time, "seconds"
 
