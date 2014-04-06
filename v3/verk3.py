@@ -56,7 +56,7 @@ class verk3:
                     #notSpan[:] = (name for name in notSpan if name != [int(G[u][0]), u,G[u][1]])
                     #notSpan.remove([int(G[u][0]), u,G[u][1]])
                 else:
-                    self.append([int(G[u][0]), G[u][1], u, False])
+                    self.Span.append([int(G[u][0]), G[u][1], u, False])
                     #notSpan[:] = (name for name in notSpan if name != [int(G[u][0]), G[u][1], u])
                     #notSpan.remove([int(G[u][0]), G[u][1], u])
             w += int(G[u][0])
@@ -87,16 +87,16 @@ class verk3:
     def NotMinPRIM(self,G,w):
 
         self.Span.sort()
-        for e in Span:
-            res = binary_search(wholeNet, e)
+        for e in self.Span:
+            res = binary_search(self.wholeNet, e)
             if not(res == -1):
-                wholeNet[res][3] = True
+                self.wholeNet[res][3] = True
             
 
-        for e in range(0,len(wholeNet)):
-            cur = len(wholeNet)-1-e
-            if not(wholeNet[cur][3]):
-                notSpan.append(wholeNet[cur])
+        for e in range(0,len(self.wholeNet)):
+            cur = len(self.wholeNet)-1-e
+            if not(self.wholeNet[cur][3]):
+                self.notSpan.append(self.wholeNet[cur])
 
         
         cnt = 0
