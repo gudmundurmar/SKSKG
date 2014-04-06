@@ -1,8 +1,8 @@
 *.class
 *.pyc
-latex/*.aux
-latex/*.log
-latex/*.out
-latex/*.gz
-latex/*.aux
-latex/*.pyg
+*/latex/*.aux
+*/latex/*.log
+*/latex/*.out
+*/latex/*.gz
+*/latex/*.aux
+*/latex/*.pyg

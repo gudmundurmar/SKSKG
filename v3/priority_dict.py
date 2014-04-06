@@ -23,20 +23,7 @@ class priority_dict(dict):
         self._heap = [(v, k) for k, v in self.iteritems()]
         heapify(self._heap)
 
-    def smallest(self):
-        """Return the item with the lowest priority.
-
-        Raises IndexError if the object is empty.
-        """
-        
-        heap = self._heap
-        v, k = heap[0]
-        while k not in self or self[k] != v:
-            heappop(heap)
-            print heap[0]
-            v, k = heap[0]
-        return k
-
+    
     def pop_smallest(self):
         """Return the item with the lowest priority and remove it.
 
@@ -62,20 +49,6 @@ class priority_dict(dict):
             # When the heap grows larger than 2 * len(self), we rebuild it
             # from scratch to avoid wasting too much memory.
             self._rebuild_heap()
-
-    def setdefault(self, key, val):
-        if key not in self:
-            self[key] = val
-            return val
-        return self[key]
-
-    def update(self, *args, **kwargs):
-        # Reimplementing dict.update is tricky -- see e.g.
-        # http://mail.python.org/pipermail/python-ideas/2007-May/000744.html
-        # We just rebuild the heap from scratch after passing to super.
-        
-        super(priority_dict, self).update(*args, **kwargs)
-        self._rebuild_heap()
 
     def sorted_iter(self):
         """Sorted iterator of the priority dictionary items.

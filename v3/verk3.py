@@ -67,7 +67,7 @@ class verk3:
                         if float(G[u][0]) == float(0):
                             G[u][0] = float(ver[1])
 
-                        #setur nýja besta
+                        #setur nyja besta
                         Q[ver[0]][0] = float(ver[1])
                         G[ver[0]][0] = float(ver[1])
         
@@ -162,5 +162,5 @@ if __name__ == '__main__':
     start_time = time.time()
     V3 = verk3()
     V3.inputToDict("10k.in")
-    print time.time() - start_time, "seconds"
+    #print time.time() - start_time, "seconds"
 

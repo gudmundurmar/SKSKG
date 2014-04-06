@@ -1,0 +1,82 @@
+\documentclass{article}
+\input{grunn_uppsetn_hd}
+\usepackage[utf8]{inputenc}
+\usepackage{minted}
+
+
+\begin{document}
+
+\begin {titlepage}
+\begin{center}
+\includegraphics[width=0.15\textwidth]{./Haskoli_Islands_rett.jpg}~\\[1cm]
+
+\textsc{\LARGE Greining Reiknirita}\\[1.5cm]
+
+\textsc{\Large TÖL403G}\\[0.5cm]
+
+% Title
+\HRule \\[0.4cm]
+{ \huge \bfseries Skilaverkefni 3\\[0.4cm] }
+
+\HRule \\[1.5cm]
+
+% Author and supervisor
+\begin{minipage}{0.5\textwidth}
+\begin{flushleft} \large
+\emph{Verkefnishöfundar:}
+\\ Guðmundur\textsc{ Már Gunnarsson }
+\\ Skarphéðinn \textsc{Þórðarsson}
+\\ Sigurður \textsc{Skúli Sigurgeirsson}
+
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Kennari:} \\
+Páll \textsc{Melsted}
+\end{flushright}
+\end{minipage}
+
+\vfill
+
+% Bottom of the page
+{\large \today}
+
+\end{center}
+
+\end{titlepage}
+
+\section {Keyrsla og virkni}
+Öll forritun fór fram í Java og notast við java version 1.6.0\_27 fyrir Windows við keyrslu og þýðingu þess. 
+Til þess að þýða forritið þarf einungis að sækja skjalið "IntervalTree.java" og þýða það með "javac IntervalTree.java"
+Forritið er aðgengilegt á \url{https://github.com/gudmundurmar/SKSKG}
+Þar er einnig að finna Stopwatch.java sem notast var við til þess að taka timann á forritinu en einnig uppgefin inntök inntök og úttök s1-s3 sem notast var við til þess að keyra forritið líkt og gefið var upp í verkefnislýsingunni. 
+\\ 	Þýðing: \texttt {\$javac IntervalTree.java}
+\\ 	Keyrsla: \texttt {\$java IntervalTree < s1.in | diff -w s1.out - | wc -l}
+
+\section {Uppbygging}
+
+Tréð er byggt upp þannig að fyrsta bilið verður rótin. Ef næsta inntak skarast ekki við bilið í nóðunni og neðri mörk bilsins eru stærri en efri mörk rótarinnar fer það hægra megin, annars fer það vinstra megin í tréð. Ef bilið skarast aftur á móti við rótina fer það í tengdann lista hjá rótinni. Það sama á við um rótina og aðrar nóður í trénu. Ef bilið skarast bætist það við nóðuna í tengdum lista. Þessi lausn hefur þann vankant að ef við byrjum á því að bæta stórum bilum í tréð getum við lent í því að tréð okkar verði bara einn tengdur listi. Upprunalega vildum við notast við median bilsins til þess að raða upp í tréð en þar sem að við fengum það ekki til þess að virka rétt, vildum við frekar hafa rétta lausn sem tæki mögulega aðeins lengri tíma frekar en ranga lausn sem tæki minni tíma. Við hugsuðum líka um kosti og galla þess að notast við rauð-svört tré til þess að halda leitartíma í lágmarki en af því að við erum að við vitum ekki hvort við erum að leita oftar en við bætum í tréð og eyðum úr því, gátum við ekki sagt til um hvort við myndum græða meira á því eða hreinlega tapa á því að innleiða rautt-svart tré í lausnina okkar.
+
+\subsection{Yfirklasinn - IntervalTree}
+\inputminted{java}{Foll.java}
+
+\subsection{Fyrsta földun - Node}
+\inputminted{java}{Node.java}
+
+\subsection{Önnur földun - Link}
+\inputminted{java}{Link.java}
+
+\pagebreak
+
+\section {Forritið í heild}
+
+\inputminted[mathescape,
+               linenos,
+               numbersep=10pt,
+               gobble=0,
+               frame=lines,
+               framesep=2mm]{python}{../verk3.py}
+
+
+\end{document}
