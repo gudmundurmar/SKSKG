@@ -97,7 +97,7 @@ def NotMinPRIM(G,w):
     global Span
 
     Span.sort()
-<<<<<<< HEAD
+
 
     for e in Span:
         res = binary_search(wholeNet, e)
@@ -109,12 +109,7 @@ def NotMinPRIM(G,w):
         cur = len(wholeNet)-1-e
         if not(wholeNet[cur][3]):
             notSpan.append(wholeNet[cur])
-=======
-    
-    for e in wholeNet:
-        if binary_search(Span, e) == -1:
-            notSpan.append(e)
->>>>>>> 1c411ab6b3ca75cab1bc081ef840bd5781501ada
+
     
     cnt = 0
     nrSecond = 1
