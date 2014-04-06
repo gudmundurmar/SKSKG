@@ -47,25 +47,41 @@ Páll \textsc{Melsted}
 \end{titlepage}
 
 \section {Keyrsla og virkni}
-Öll forritun fór fram í Java og notast við java version 1.6.0\_27 fyrir Windows við keyrslu og þýðingu þess. 
-Til þess að þýða forritið þarf einungis að sækja skjalið "IntervalTree.java" og þýða það með "javac IntervalTree.java"
-Forritið er aðgengilegt á \url{https://github.com/gudmundurmar/SKSKG}
+Öll forritun fór fram í Python og notast við Python version 2.7 fyrir Windows við keyrslu þess. 
+Forritið er aðgengilegt á \url{https://github.com/gudmundurmar/SKSKG/V3}
 Þar er einnig að finna Stopwatch.java sem notast var við til þess að taka timann á forritinu en einnig uppgefin inntök inntök og úttök s1-s3 sem notast var við til þess að keyra forritið líkt og gefið var upp í verkefnislýsingunni. 
-\\ 	Þýðing: \texttt {\$javac IntervalTree.java}
-\\ 	Keyrsla: \texttt {\$java IntervalTree < s1.in | diff -w s1.out - | wc -l}
 
-\section {Uppbygging}
+ 	Keyrsla: \texttt {\$ Python verk3.py < 10.in | diff -w 10.out -}
 
-Tréð er byggt upp þannig að fyrsta bilið verður rótin. Ef næsta inntak skarast ekki við bilið í nóðunni og neðri mörk bilsins eru stærri en efri mörk rótarinnar fer það hægra megin, annars fer það vinstra megin í tréð. Ef bilið skarast aftur á móti við rótina fer það í tengdann lista hjá rótinni. Það sama á við um rótina og aðrar nóður í trénu. Ef bilið skarast bætist það við nóðuna í tengdum lista. Þessi lausn hefur þann vankant að ef við byrjum á því að bæta stórum bilum í tréð getum við lent í því að tréð okkar verði bara einn tengdur listi. Upprunalega vildum við notast við median bilsins til þess að raða upp í tréð en þar sem að við fengum það ekki til þess að virka rétt, vildum við frekar hafa rétta lausn sem tæki mögulega aðeins lengri tíma frekar en ranga lausn sem tæki minni tíma. Við hugsuðum líka um kosti og galla þess að notast við rauð-svört tré til þess að halda leitartíma í lágmarki en af því að við erum að við vitum ekki hvort við erum að leita oftar en við bætum í tréð og eyðum úr því, gátum við ekki sagt til um hvort við myndum græða meira á því eða hreinlega tapa á því að innleiða rautt-svart tré í lausnina okkar.
 
-\subsection{Yfirklasinn - IntervalTree}
-\inputminted{java}{Foll.java}
+\section {Keyrslutími}
 
-\subsection{Fyrsta földun - Node}
-\inputminted{java}{Node.java}
+Tími: Aðferðin doubleBFS skoðar í mesta lagi alla hnúta í netinu einu sinni og tekur því O(V). Það að finna rétta hnútinn sem tengir saman samhengisþættina tekur O(V*(V-E)). Það þarf að keyra í mesta lagi V-E sinnum í gegnum forlykkju því það er lengdin á notSpan og lengsta mögulega lengdin á context (samhengisþættinum) er V/2 og af því að við gerum “if notSpan[cur][1] in context” sem tekur O(V).
+Lykkjuna til að finna N-1 spantrén keyrum við O(V) sinnum svo að tímaflækjan fyrir  næstminnsta spantré fyrir hvern legg er O(V*(V+V*(E-V)))
 
-\subsection{Önnur földun - Link}
-\inputminted{java}{Link.java}
+
+\begin{center}
+    \begin{tabular}{| l | l | l | l |}
+    \hline
+    Inntak & Keyrslutími\\ \hline
+    10.in & tala\\ \hline
+    100.in & tala\\ \hline
+    1k.in & tala\\ \hline
+    10k & 117.254707098 sek\\ \hline
+    100k & Keyrslutími\\ \hline
+
+    \end{tabular}
+\end{center}
+117.254707098 seconds
+
+
+\subsection{Meginklasinn - Verk3}
+\inputminted{python}{verk3.py}
+
+
+\subsection{Priority dict}
+\inputminted{python}{priority_dict.py}
+
 
 \pagebreak
 
