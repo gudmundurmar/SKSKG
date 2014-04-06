@@ -1,6 +1,5 @@
 # -*- coding: cp1252 -*-
 from priority_dict import priority_dict
-from Queue import *
 import time
 
 notSpan = []
@@ -96,10 +95,10 @@ def NotMinPRIM(G,w):
     global notSpan
     global Span
 
-    Span.sort(reverse=True)
+    Span.sort()
 
     for e in wholeNet:
-        if not(e in Span):
+        if binary_search(Span, e) == -1:
             notSpan.append(e)
     
     cnt = 0
@@ -163,9 +162,15 @@ def doubleBFS(G,u,v):
     else:
         return contextV
         
-        
+
+from bisect import bisect_left
+
+def binary_search(a, x, lo=0, hi=None):   # can't use a to specify default for hi
+    hi = hi if hi is not None else len(a) # hi defaults to len(a)   
+    pos = bisect_left(a,x,lo,hi)          # find insertion position
+    return (pos if pos != hi and a[pos] == x else -1) # don't walk off the end    
     
                 
 start_time = time.time()
-inputToDict("1k.in")
+inputToDict("10k.in")
 print time.time() - start_time, "seconds"
