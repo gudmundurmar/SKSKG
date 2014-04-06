@@ -29,6 +29,7 @@ def inputToDict(filename):
 
     
     notSpan.sort(reverse=True)
+
     weight = MSTPRIM(dict,0, dict['0']);
     print weight
     NotMinPRIM(dict, weight)
@@ -40,8 +41,6 @@ def MSTPRIM(G,w,r):
     global tree
     global notSpan
     r[0] = 0
-
-
 
     tree = []
     
@@ -59,7 +58,8 @@ def MSTPRIM(G,w,r):
         
         w += int(Q[u][0])
         
-        u = Q.pop_smallest()
+        
+        Q.pop_smallest()
 
 
         tree.append(u)
@@ -154,5 +154,5 @@ def doubleBFS(G,u,v):
     
                 
 start_time = time.time()
-inputToDict("10k.in")
+inputToDict("simple.in")
 print time.time() - start_time, "seconds"
