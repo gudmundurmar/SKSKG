@@ -11,7 +11,7 @@ def inputToDict(filename):
     global wholeNet
     global Span
     dict = {}
-    count = {}
+    
     file = open(filename).readlines()
     for line in file:
         split = line.split(" ")
@@ -31,6 +31,7 @@ def inputToDict(filename):
     wholeNet.sort(reverse=True)
     weight = MSTPRIM(dict,0, dict['0']);
     print weight
+    print dict
     NotMinPRIM(dict, weight)
 
 tree = []
@@ -96,7 +97,7 @@ def NotMinPRIM(G,w):
     global Span
 
     Span.sort()
-
+    
     for e in wholeNet:
         if binary_search(Span, e) == -1:
             notSpan.append(e)
@@ -134,7 +135,7 @@ def NotMinPRIM(G,w):
 
     while Q:
         u = Q.smallest()
-        print str(Q[u][0])+" "+str(Q[u][1])+" "+str(Q[u][2])
+        #print str(Q[u][0])+" "+str(Q[u][1])+" "+str(Q[u][2])
         u = Q.pop_smallest()
     
 
@@ -172,5 +173,5 @@ def binary_search(a, x, lo=0, hi=None):   # can't use a to specify default for h
     
                 
 start_time = time.time()
-inputToDict("10k.in")
+inputToDict("simple.in")
 print time.time() - start_time, "seconds"
