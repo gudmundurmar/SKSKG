@@ -26,7 +26,7 @@ class verk3:
     Eftir:  Búið er að prenta út vigtina á minnsta spantrénu og næstminnsta
             spantré fyrir hvern legg
     """
-    def inputToDict(self):
+    def inputToDict(self,filename):
         dict = {}
         
         length = int(sys.stdin.readline())
@@ -112,6 +112,8 @@ class verk3:
 
         
         cnt = 0
+        nrSecond = 1
+        weight = 0
         shortest = {}
 
 
@@ -148,6 +150,7 @@ class verk3:
 Fyrir: G er net hnúta, u er hnútur og v er foreldi hnútsins í minnsta spantrénu
 Eftir: Búið er að skipta minnsta  spantrénu upp í tvo samhengisþætti og finna minni samhengisþáttinn
 """
+
 def doubleBFS(G,u,v):
     contextU = [u]
     contextV = [v]
@@ -180,6 +183,8 @@ def binary_search(a, x, lo=0, hi=None):   # can't use a to specify default for h
     
 
 if __name__ == '__main__':
+    start_time = time.time()
     V3 = verk3()
-    V3.inputToDict()
+    V3.inputToDict("10k.in")
+    print time.time() - start_time, "seconds"
 

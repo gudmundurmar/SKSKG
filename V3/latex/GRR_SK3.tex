@@ -2,6 +2,7 @@
 \input{grunn_uppsetn_hd}
 \usepackage[utf8]{inputenc}
 \usepackage{minted}
+\usepackage{Verbatim}
 
 
 \begin{document}
@@ -49,14 +50,25 @@ Páll \textsc{Melsted}
 \section {Keyrsla og virkni}
 Öll forritun fór fram í Python og notast við Python version 2.7 fyrir Windows við keyrslu þess. 
 Forritið er aðgengilegt á \url{https://github.com/gudmundurmar/SKSKG/V3}
-Þar er einnig að finna Stopwatch.java sem notast var við til þess að taka timann á forritinu en einnig uppgefin inntök inntök og úttök s1-s3 sem notast var við til þess að keyra forritið líkt og gefið var upp í verkefnislýsingunni. 
+ \begin {center}Keyrsla: \texttt {\$ Python verk3.py < 10.in | diff -w 10.out -} \end {center}
 
- 	Keyrsla: \texttt {\$ Python verk3.py < 10.in | diff -w 10.out -}
+Til þess að mæla timann var notast við time í Python til þess að mæla tímann
+\begin {quote}
+\begin {verbatim}
+
+ start\_time = time.time()
+	..."""Forrit keyrt"""
+ print time.time() - start\_time, "seconds"
+
+\end {verbatim}
+\end {quote}
+
+
 
 
 \section {Keyrslutími}
 
-Tími: Aðferðin doubleBFS skoðar í mesta lagi alla hnúta í netinu einu sinni og tekur því O(V). Það að finna rétta hnútinn sem tengir saman samhengisþættina tekur O(V*(V-E)). Það þarf að keyra í mesta lagi V-E sinnum í gegnum forlykkju því það er lengdin á notSpan og lengsta mögulega lengdin á context (samhengisþættinum) er V/2 og af því að við gerum “if notSpan[cur][1] in context” sem tekur O(V).
+\subsection{Tími til að finna næstminnsta spantré fyrir hvern legg} Aðferðin doubleBFS skoðar í mesta lagi alla hnúta í netinu einu sinni og tekur því O(V). Það að finna rétta hnútinn sem tengir saman samhengisþættina tekur O(V*(V-E)). Það þarf að keyra í mesta lagi V-E sinnum í gegnum forlykkju því það er lengdin á notSpan og lengsta mögulega lengdin á context (samhengisþættinum) er V/2 og af því að við gerum “if notSpan[cur][1] in context” sem tekur O(V).
 Lykkjuna til að finna N-1 spantrén keyrum við O(V) sinnum svo að tímaflækjan fyrir  næstminnsta spantré fyrir hvern legg er O(V*(V+V*(E-V)))
 
 
@@ -64,15 +76,15 @@ Lykkjuna til að finna N-1 spantrén keyrum við O(V) sinnum svo að tímaflækj
     \begin{tabular}{| l | l | l | l |}
     \hline
     Inntak & Keyrslutími\\ \hline
-    10.in & tala\\ \hline
-    100.in & tala\\ \hline
-    1k.in & tala\\ \hline
+    10.in & 0.00100016593933 sek\\ \hline
+    100.in & 0.0019998550415 sek\\ \hline
+    1k.in & 0.942054033279 sek\\ \hline
     10k & 117.254707098 sek\\ \hline
-    100k & Keyrslutími\\ \hline
+    100k & Óstaðfestur (keyboard interrupt eftir 40 mín)\\ \hline
 
     \end{tabular}
 \end{center}
-117.254707098 seconds
+
 
 
 \subsection{Meginklasinn - Verk3}
