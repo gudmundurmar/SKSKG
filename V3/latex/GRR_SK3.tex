@@ -48,6 +48,7 @@ Páll \textsc{Melsted}
 \end{titlepage}
 
 \section {Keyrsla og virkni}
+\subsection {Keyrsla}
 Öll forritun fór fram í Python og notast við Python version 2.7 fyrir Windows við keyrslu þess. 
 Forritið er aðgengilegt á \url{https://github.com/gudmundurmar/SKSKG/V3}
  \begin {center}Keyrsla: \texttt {\$ Python verk3.py < 10.in | diff -w 10.out -} \end {center}
@@ -56,20 +57,24 @@ Til þess að mæla timann var notast við time í Python til þess að mæla t�
 \begin {quote}
 \begin {verbatim}
 
- start\_time = time.time()
-	..."""Forrit keyrt"""
- print time.time() - start\_time, "seconds"
+start\_time = time.time()
+   """Forrit keyrt"""
+print time.time() - start\_time, "seconds"
 
 \end {verbatim}
 \end {quote}
 
-
+\subsection {Hugmynd fyrir N-1 MST}
+Þegar við losum okkur við einn legg í MST þá endum við í raunin með tvo ótengda samhengisþætti. Til þess að finna MST fyrir N-1 trén verðum við því að fara í gegnum notSpan sem er raðaður listi af leggjum sem eru ekki í spantrénu og finnum minnsta legginn sem tengir saman samhengisþættina saman. 
 
 
 \section {Keyrslutími}
 
 \subsection{Tími til að finna næstminnsta spantré fyrir hvern legg} Aðferðin doubleBFS skoðar í mesta lagi alla hnúta í netinu einu sinni og tekur því O(V). Það að finna rétta hnútinn sem tengir saman samhengisþættina tekur O(V*(V-E)). Það þarf að keyra í mesta lagi V-E sinnum í gegnum forlykkju því það er lengdin á notSpan og lengsta mögulega lengdin á context (samhengisþættinum) er V/2 og af því að við gerum “if notSpan[cur][1] in context” sem tekur O(V).
-Lykkjuna til að finna N-1 spantrén keyrum við O(V) sinnum svo að tímaflækjan fyrir  næstminnsta spantré fyrir hvern legg er O(V*(V+V*(E-V)))
+Lykkjuna til að finna N-1 spantrén keyrum við O(V) sinnum svo að tímaflækjan fyrir  næstminnsta spantré fyrir hvern legg er O(V*(V+V*(E-V))). Þar sem að þetta er mesta flækjustig forritsins verður þetta einnig timaflækja forritsins
+\begin {center}
+Heildartímaflækja forrits: O(V*(V+V*(E-V))) 
+\end {center}
 
 
 \begin{center}
